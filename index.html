@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Trebuchet MS', sans-serif;
+    background: linear-gradient(135deg, #241044, #702b76, #e56b91);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    font-size: clamp(38px, 9vw, 65px);
+    margin-bottom: 10px;
+    color: #ffe69a;
+    text-shadow: 0 0 20px #ffb6d5;
+    animation: glow 2s infinite alternate;
+}
+
+.subtitle {
+    font-size: 19px;
+    margin-bottom: 25px;
+}
+
+.cake {
+    font-size: 100px;
+    margin: 15px;
+    animation: bounce 2s infinite;
+}
+
+button {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    background: #ffe69a;
+    color: #56204f;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 20px #0004;
+    transition: 0.3s;
+}
+
+button:active {
+    transform: scale(0.92);
+}
+
+#surprise {
+    display: none;
+    margin-top: 30px;
+    padding: 22px;
+    max-width: 400px;
+    background: #ffffff20;
+    border: 1px solid #ffffff55;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    animation: appear 1s;
+}
+
+#surprise h2 {
+    color: #ffe69a;
+}
+
+.balloon {
+    position: fixed;
+    bottom: -120px;
+    font-size: 45px;
+    animation: float 9s linear infinite;
+    z-index: 1;
+}
+
+.star {
+    position: fixed;
+    color: #ffe69a;
+    animation: twinkle 2s infinite alternate;
+    z-index: 1;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ffb6d5; }
+    to { text-shadow: 0 0 30px #ffe69a; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+@keyframes float {
+    from { transform: translateY(0) rotate(0); }
+    to { transform: translateY(-120vh) rotate(30deg); }
+}
+
+@keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <p class="subtitle">A special day for a special person ✨</p>
+
+    <h1>Happy Birthday!</h1>
+
+    <div class="cake">🎂</div>
+
+    <p>Today is your day. Let's make it unforgettable!</p>
+
+    <button onclick="showSurprise()">
+        Open Your Surprise 🎁
+    </button>
+
+    <div id="surprise">
+        <h2>🎉 Surprise! 🎉</h2>
+        <p>
+            May your life be filled with happiness,
+            love, success and beautiful memories.
+        </p>
+        <h2>Have an amazing birthday! ❤️</h2>
+        <p>Never stop smiling! 🌟</p>
+    </div>
+
+</div>
+
+<script>
+function showSurprise() {
+    document.getElementById("surprise").style.display = "block";
+
+    for (let i = 0; i < 30; i++) {
+        let confetti = document.createElement("div");
+
+        confetti.innerHTML = ["🎉", "✨", "💖", "🎊"][Math.floor(Math.random() * 4)];
+
+        confetti.style.position = "fixed";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.top = "-30px";
+        confetti.style.fontSize = "25px";
+        confetti.style.zIndex = "10";
+        confetti.style.transition = "transform 3s linear, opacity 3s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.style.transform =
+                "translateY(110vh) rotate(600deg)";
+            confetti.style.opacity = "0";
+        }, 50);
+
+        setTimeout(() => confetti.remove(), 3200);
+    }
+}
+
+// Create floating balloons
+const balloons = ["🎈", "🎈", "🎈", "💜", "💗"];
+
+balloons.forEach((emoji, i) => {
+    let balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.innerHTML = emoji;
+    balloon.style.left = (i * 20) + "%";
+    balloon.style.animationDelay = (i * 1.5) + "s";
+    document.body.appendChild(balloon);
+});
+
+// Create stars
+for (let i = 0; i < 25; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.innerHTML = "✦";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+</body>
+</html>
